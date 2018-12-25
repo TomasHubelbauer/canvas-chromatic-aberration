@@ -13,7 +13,7 @@
 const canvas = document.querySelector('#demoCanvas');
 const context = canvas.getContext('2d');
 const image = new Image();
-image.src = 'demo.png';
+image.src = 'demo.jpg';
 image.onload = function(){
   context.drawImage(image, 0, 0);
   const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
