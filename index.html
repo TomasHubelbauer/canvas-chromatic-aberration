@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas Chromatic Abberation</title>
+  </head>
+  <body>
+    <h1>Canvas Chromatic Abberation</h1>
+    <canvas id="demoCanvas"></canvas>
+    <script>
+// Based on https://gist.github.com/lqt0223/8a258b68ae1c032fa1fb1e26c4965e8d
+      
+const canvas = document.querySelector('#demoCanvas');
+const context = canvas.getContext('2d');
+const image = new Image();
+image.src = 'demo.png';
+image.onload = function(){
+  context.drawImage(image, 0, 0);
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  chromaticAberration(imageData, 5, 0);
+  context.putImageData(imageData, 0, 0);
+}
+
+function chromaticAberration(imageData, intensity, phase){
+  /* Use canvas to draw the original image, and load pixel data by calling getImageData
+  The ImageData.data is an one-dimentional Uint8Array with all the color elements flattened. The array contains data in the sequence of [r,g,b,a,r,g,b,a...]
+  Because of the cross-origin issue, remember to run the demo in a localhost server or the getImageData call will throw error
+  */
+  
+  const data = imageData.data;
+  for (let i = phase % 4; i < data.length; i += 4) {
+    // Setting the start of the loop to a different integer will change the aberration color, but a start integer of 4n-1 will not work
+    data[i] = data[i + 4 * intensity];
+  }
+}
+    </script>
+  </body>
+</html>
