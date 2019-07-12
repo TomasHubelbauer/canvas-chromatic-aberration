@@ -2,6 +2,10 @@ body {
   font: normal 16px sans-serif;
 }
 
+code {
+  background: silver;
+}
+
 canvas {
   display: block;
   max-width: 100%;
