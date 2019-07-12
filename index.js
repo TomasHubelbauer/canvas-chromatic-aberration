@@ -33,6 +33,24 @@ window.addEventListener('load', () => {
     }
   });
 
+  document.getElementById('cameraSelect').addEventListener('change', async () => {
+    // Switch to static for a moment so that the video gets released if it is already playing
+    staticSourceInput.checked = true;
+    await new Promise(resolve => window.setTimeout(resolve, 100));
+
+    dynamicSourceInput.checked = true;
+
+    try {
+      await renderDynamic(context);
+    } catch (error) {
+      alert('Something went wront with obtaining the live video feed.\n' + error.toString());
+
+      // Switch back to static in case there is a problem with obtaining the camera
+      staticSourceInput.checked = true;
+      renderStatic(context);
+    }
+  })
+
   staticSourceInput.checked = true;
   renderStatic(context);
 });
@@ -52,7 +70,7 @@ function renderStatic(/** @type {CanvasRenderingContext2D} */ context) {
 }
 
 async function renderDynamic(/** @type {CanvasRenderingContext2D} */ context) {
-  const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+  const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: document.getElementById('cameraSelect').value }, audio: false });
   const liveVideo = document.createElement('video');
   liveVideo.srcObject = mediaStream;
   await liveVideo.play();

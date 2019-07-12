@@ -11,8 +11,13 @@
     <h1><code>canvas</code> Chromatic Abberation</h1>
     <input type="radio" id="staticSourceInput" name="source" checked />
     <label for="staticSourceInput">Static image</label>
+    <br />
     <input type="radio" id="dynamicSourceInput" name="source" />
     <label for="dynamicSourceInput">Live webcam feed</label>
+    <select id="cameraSelect">
+      <option selected>user</option>
+      <option>environment</option>
+    </select>
     <br />
     <label for="intensityInput">Intensity:</label>
     <input type="range" id="intensityInput" min="0" max="10" value="5" />
