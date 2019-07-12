@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     try {
       await renderDynamic(context)
     } catch (error) {
-      alert('Something went wront with obtaining the live video feed.');
+      alert('Something went wront with obtaining the live video feed.\n' + error.toString());
 
       // Switch back to static in case there is a problem with obtaining the camera
       staticSourceInput.checked = true;
