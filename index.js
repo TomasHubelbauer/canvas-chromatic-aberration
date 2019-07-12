@@ -78,6 +78,7 @@ async function renderDynamic(/** @type {CanvasRenderingContext2D} */ context) {
   liveVideo.setAttribute('autoplay', '');
   liveVideo.setAttribute('muted', '');
   liveVideo.setAttribute('playsinline', '');
+  await liveVideo.play();
 
   function render() {
     context.canvas.width = liveVideo.videoWidth;
