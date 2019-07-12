@@ -73,7 +73,11 @@ async function renderDynamic(/** @type {CanvasRenderingContext2D} */ context) {
   const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: document.getElementById('cameraSelect').value }, audio: false });
   const liveVideo = document.createElement('video');
   liveVideo.srcObject = mediaStream;
-  await liveVideo.play();
+
+  // https://stackoverflow.com/a/54678952/2715716
+  liveVideo.setAttribute('autoplay', '');
+  liveVideo.setAttribute('muted', '');
+  liveVideo.setAttribute('playsinline', '');
 
   function render() {
     context.canvas.width = liveVideo.videoWidth;
