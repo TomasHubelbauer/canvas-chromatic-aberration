@@ -19,6 +19,20 @@ window.addEventListener('load', () => {
     }
   });
 
+  document.getElementById('intensityInput').addEventListener('input', () => {
+    // Handle only static as dynamic reads the values in rAF
+    if (staticSourceInput.checked) {
+      renderStatic(context);
+    }
+  });
+
+  document.getElementById('phaseInput').addEventListener('input', () => {
+    // Handle only static as dynamic reads the values in rAF
+    if (staticSourceInput.checked) {
+      renderStatic(context);
+    }
+  });
+
   staticSourceInput.checked = true;
   renderStatic(context);
 });
@@ -32,7 +46,7 @@ function renderStatic(/** @type {CanvasRenderingContext2D} */ context) {
     context.canvas.height = image.naturalHeight;
     context.drawImage(image, 0, 0);
     const imageData = context.getImageData(0, 0, context.canvas.width, context.canvas.height);
-    chromaticAberration(imageData, 5, 0);
+    chromaticAberration(imageData, document.getElementById('intensityInput').valueAsNumber, document.getElementById('phaseInput').valueAsNumber);
     context.putImageData(imageData, 0, 0);
   });
 }
@@ -48,7 +62,7 @@ async function renderDynamic(/** @type {CanvasRenderingContext2D} */ context) {
     context.canvas.height = liveVideo.videoHeight;
     context.drawImage(liveVideo, 0, 0);
     const imageData = context.getImageData(0, 0, context.canvas.width, context.canvas.height);
-    chromaticAberration(imageData, 5, 0);
+    chromaticAberration(imageData, document.getElementById('intensityInput').valueAsNumber, document.getElementById('phaseInput').valueAsNumber);
     context.putImageData(imageData, 0, 0);
 
     if (document.getElementById('dynamicSourceInput').checked) {
