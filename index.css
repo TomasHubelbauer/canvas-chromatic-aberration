@@ -1,0 +1,8 @@
+body {
+  font: normal 16px sans-serif;
+}
+
+canvas {
+  display: block;
+  max-width: 100%;
+}
