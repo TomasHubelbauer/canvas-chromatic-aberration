@@ -1,5 +1,7 @@
 # `canvas` Chromatic Abberation
 
+![](demo.jpg)
+
 [**LIVE**](https://tomashubelbauer.github.io/canvas-chromatic-abberation/)
 
 This is a demo of the chromatic abberation effect in HTML `canvas`.
