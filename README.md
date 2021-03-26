@@ -1,6 +1,6 @@
 # `canvas` Chromatic Abberation
 
-![](demo.jpg)
+![](demo.jpg) ![](demo-effect.png)
 
 [**LIVE**](https://tomashubelbauer.github.io/canvas-chromatic-abberation/)
 
